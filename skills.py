@@ -155,8 +155,15 @@ def remove_duplicates(words):
         ['Rose', 'a', 'is', 'rose']
 
     """
+    unique_list = []
 
-    return []
+    # unique_list = [append(word) for word in words if word not in unique_list]
+
+    for word in words:
+        if word not in unique_list:
+            unique_list.append(word)
+
+    return unique_list
 
 
 def encode(phrase):
@@ -169,7 +176,25 @@ def encode(phrase):
         >>> encode("You are a beautiful, talented, brilliant, powerful musk ox.")
         'You drp d bpduouful, odlpnopd, brulludno, powprful musk ox.'
     """
-    return ''
+
+    code = {
+        "e" : "p",
+        "a" : "d",
+        "t" : "o",
+        "i" : "u"
+    }
+
+    letter_list = []
+    letter_list = [letter for letter in phrase]
+    new_phrase = ""
+
+    for letter in letter_list:
+        if letter in code:
+            new_phrase += code[letter]
+        else:
+            new_phrase += letter
+
+    return new_phrase
 
 
 def sort_by_word_length(words):
@@ -185,8 +210,11 @@ def sort_by_word_length(words):
         [(1, ['a']), (2, ['ok', 'an']), (3, ['day']), (5, ['apple'])]
 
     """
+    dictionary = {}
+    for letter in words:
+        dictionary.setdefault(len(letter), []).append(letter)
 
-    return []
+    return sorted(dictionary.items())
 
 
 def get_pirate_talk(phrase):
@@ -231,8 +259,38 @@ def get_pirate_talk(phrase):
         'me swabbie be not a man!'
 
     """
+    code = {
+        "sir" : "matey",
+        "hotel" : "fleabag inn",
+        "student" : "swabbie",
+        "boy" : "matey",
+        "madam" : "proud beauty",
+        "professor" : "foul blaggart",
+        "restaurant" : "galley",
+        "your": "yer",
+        "excuse" : "arr",
+        "students" : "swabbies",
+        "are" : "be",
+        "lawyer" : "foul blaggart",
+        "the" : "th'",
+        "restroom" : "head",
+        "my" : "me",
+        "hello" : "avast",
+        "is" : "be",
+        "man" : "matey",
+    }
 
-    return ""
+    word_list = phrase.split()
+    pirate_phrase_list = []
+
+    for word in word_list:
+        if word in code:
+            pirate_word = code[word]
+            pirate_phrase_list.append(pirate_word)
+        else:
+            pirate_phrase_list.append(word)
+
+    return " ".join(pirate_phrase_list)
 
 # End of skills. See below for advanced problems.
 # To work on them, set ADVANCED=True at the top of this file.
